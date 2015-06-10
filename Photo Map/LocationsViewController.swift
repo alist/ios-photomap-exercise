@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol LocationsViewControllerDelegate : class{
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+}
+
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    weak var delegate : LocationsViewControllerDelegate!
+    var userInfo : AnyObject!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -51,7 +58,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         fetchLocations(searchBar.text)
     }
     
-    func fetchLocations(query: String, near: String = "Sunnyvale") {
+    func fetchLocations(query: String, near: String = "San+Francisco") {
         var url = "https://api.foursquare.com/v2/venues/search?client_id=QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL&client_secret=W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU&v=20141020&near=\(near),CA&query=\(query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"
         var request = NSURLRequest(URL: NSURL(string: url)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -62,9 +69,24 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var venue = results[indexPath.row] as! NSDictionary
+        
+        var lat = venue.valueForKeyPath("location.lat") as! NSNumber
+        var lng = venue.valueForKeyPath("location.lng") as! NSNumber
+        
+        var latString = "\(lat)"
+        var lngString = "\(lng)"
+        
+        println(latString + " " + lngString)
+        
+        delegate.locationsPickedLocation(self, latitude: lat, longitude: lng)
+    }
+    
 
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
@@ -77,11 +99,6 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         var lat = venue.valueForKeyPath("location.lat") as! NSNumber
         var lng = venue.valueForKeyPath("location.lng") as! NSNumber
-        
-        var latString = "\(lat)"
-        var lngString = "\(lng)"
-        
-        println(latString + " " + lngString)
     }
 
 }

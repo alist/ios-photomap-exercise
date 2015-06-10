@@ -9,9 +9,11 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    var nextPhoto: UIImage!
+    var annotations: [PhotoAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +48,28 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             dismissViewControllerAnimated(true, completion: nil)
             performSegueWithIdentifier("tagSegue", sender: editedImage)
     }
+    
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber,longitude: NSNumber) {
+        var coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue)
+        var image = controller.userInfo as! UIImage
+        
+        navigationController?.popToViewController(self, animated: true)
+        
+        var annotation = PhotoAnnotation()
+        annotation.coordinate = coordinate
+        annotation.photo = image
+        
+        annotations.append(annotation)
+        mapView.addAnnotation(annotation)
+    }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        var locations = segue.destinationViewController as! LocationsViewController
+        locations.delegate = self
+        locations.userInfo = sender
     }
-    */
 
 }
