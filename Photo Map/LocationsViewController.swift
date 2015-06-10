@@ -33,9 +33,9 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as LocationCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as! LocationCell
         
-        cell.location = results[indexPath.row] as NSDictionary
+        cell.location = results[indexPath.row] as! NSDictionary
         
         return cell
     }
@@ -56,8 +56,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         var request = NSURLRequest(URL: NSURL(string: url)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (data != nil) {
-                var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
-                self.results = responseDictionary.valueForKeyPath("response.venues") as NSArray
+                var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
+                self.results = responseDictionary.valueForKeyPath("response.venues") as! NSArray
                 self.tableView.reloadData()
             }
         }
@@ -69,14 +69,14 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var cell = sender as UITableViewCell
+        var cell = sender as! UITableViewCell
         var indexPath = tableView.indexPathForCell(cell)!
         
         // This is the selected venue
-        var venue = results[indexPath.row] as NSDictionary
+        var venue = results[indexPath.row] as! NSDictionary
         
-        var lat = venue.valueForKeyPath("location.lat") as NSNumber
-        var lng = venue.valueForKeyPath("location.lng") as NSNumber
+        var lat = venue.valueForKeyPath("location.lat") as! NSNumber
+        var lng = venue.valueForKeyPath("location.lng") as! NSNumber
         
         var latString = "\(lat)"
         var lngString = "\(lng)"

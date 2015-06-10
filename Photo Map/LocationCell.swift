@@ -21,9 +21,9 @@ class LocationCell: UITableViewCell {
             
             var categories = location["categories"] as? NSArray
             if (categories != nil && categories!.count > 0) {
-                var category = categories![0] as NSDictionary
-                var urlPrefix = category.valueForKeyPath("icon.prefix") as String
-                var urlSuffix = category.valueForKeyPath("icon.suffix") as String
+                var category = categories![0] as! NSDictionary
+                var urlPrefix = category.valueForKeyPath("icon.prefix") as! String
+                var urlSuffix = category.valueForKeyPath("icon.suffix") as! String
                 
                 var url = "\(urlPrefix)bg_32\(urlSuffix)"
                 categoryImageView.setImageWithURL(NSURL(string: url))
