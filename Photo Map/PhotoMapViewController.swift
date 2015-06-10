@@ -33,7 +33,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
-        imageView.image = UIImage(named: "camera")
+        imageView.image = (annotation as? PhotoAnnotation)?.photo
         
         return annotationView
     }
