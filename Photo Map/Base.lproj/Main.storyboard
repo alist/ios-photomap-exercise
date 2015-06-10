@@ -159,6 +159,9 @@
                                         <integer key="value" value="45"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="vVC-R6-BKp" eventType="touchUpInside" id="r6p-M4-uaa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -174,6 +177,7 @@
                     <navigationItem key="navigationItem" title="Photo Map" id="bIl-8X-40k"/>
                     <connections>
                         <outlet property="mapView" destination="FyO-wV-5ip" id="8dx-RT-BtB"/>
+                        <segue destination="eZf-Nb-6PU" kind="show" identifier="tagSegue" id="4VG-Or-PC8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZg-G6-bQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -202,4 +206,7 @@
     <resources>
         <image name="camera" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4VG-Or-PC8"/>
+    </inferredMetricsTieBreakers>
 </document>
