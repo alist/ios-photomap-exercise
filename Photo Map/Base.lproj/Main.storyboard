@@ -132,7 +132,7 @@
         <!--Photo Map-->
         <scene sceneID="umY-tm-Jxp">
             <objects>
-                <viewController id="vVC-R6-BKp" sceneMemberID="viewController">
+                <viewController id="vVC-R6-BKp" customClass="PhotoMapViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iq2-Vb-RwN"/>
                         <viewControllerLayoutGuide type="bottom" id="bPp-QA-AZR"/>
@@ -172,6 +172,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Map" id="bIl-8X-40k"/>
+                    <connections>
+                        <outlet property="mapView" destination="FyO-wV-5ip" id="8dx-RT-BtB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZg-G6-bQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
