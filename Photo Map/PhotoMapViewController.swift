@@ -30,12 +30,19 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView.canShowCallout = true
             annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 30, height:30))
+
+            var detailsButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            annotationView.rightCalloutAccessoryView = detailsButton
         }
         
         let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
         imageView.image = (annotation as? PhotoAnnotation)?.photo
         
         return annotationView
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        performSegueWithIdentifier("fullImageSegue", sender: (view.annotation as? PhotoAnnotation)?.photo)
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,9 +91,11 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var locations = segue.destinationViewController as! LocationsViewController
-        locations.delegate = self
-        locations.userInfo = sender
+        if var locations = segue.destinationViewController as? LocationsViewController {
+            locations.delegate = self
+            locations.userInfo = sender
+        }else if var fullImageVC = segue.destinationViewController as? FullImageViewController {
+            fullImageVC.image = sender as! UIImage
+        }
     }
-
 }
