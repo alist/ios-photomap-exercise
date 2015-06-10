@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     var nextPhoto: UIImage!
@@ -19,8 +19,25 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         
         mapView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667), MKCoordinateSpanMake(0.1, 0.1)), animated: false)
+        mapView.delegate = self
     }
 
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        let reuseID = "myAnnotationView"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
+        if (annotationView == nil) {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView.canShowCallout = true
+            annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 30, height:30))
+        }
+        
+        let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
+        imageView.image = UIImage(named: "camera")
+        
+        return annotationView
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
