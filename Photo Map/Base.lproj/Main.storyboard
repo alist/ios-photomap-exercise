@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CM3-Mn-D8D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3cd-zp-cV9">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -46,7 +47,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101 S Murphy Ave" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUV-fK-4vy">
-                                                    <rect key="frame" x="48" y="34" width="544" height="14.5"/>
+                                                    <rect key="frame" x="48" y="34" width="544" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43902853260869568" green="0.43902853260869568" blue="0.43902853260869568" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -128,5 +129,74 @@
             </objects>
             <point key="canvasLocation" x="195" y="-3"/>
         </scene>
+        <!--Photo Map-->
+        <scene sceneID="umY-tm-Jxp">
+            <objects>
+                <viewController id="vVC-R6-BKp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iq2-Vb-RwN"/>
+                        <viewControllerLayoutGuide type="bottom" id="bPp-QA-AZR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sW7-xv-Kke">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FyO-wV-5ip">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OO-cK-chc">
+                                <rect key="frame" x="256" y="477" width="90" height="90"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9OO-cK-chc" secondAttribute="height" multiplier="1:1" id="J9Q-FI-Yf2"/>
+                                    <constraint firstAttribute="width" constant="90" id="kru-hM-mTr"/>
+                                </constraints>
+                                <state key="normal" image="camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="45"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bPp-QA-AZR" firstAttribute="top" secondItem="FyO-wV-5ip" secondAttribute="bottom" id="0DW-Rw-PQ1"/>
+                            <constraint firstAttribute="trailing" secondItem="FyO-wV-5ip" secondAttribute="trailing" id="Cdc-Lo-MVH"/>
+                            <constraint firstItem="FyO-wV-5ip" firstAttribute="centerX" secondItem="9OO-cK-chc" secondAttribute="centerX" constant="-0.5" id="VRH-oZ-Pmg"/>
+                            <constraint firstItem="FyO-wV-5ip" firstAttribute="bottom" secondItem="9OO-cK-chc" secondAttribute="bottom" constant="33" id="bD1-XR-TH2"/>
+                            <constraint firstItem="FyO-wV-5ip" firstAttribute="leading" secondItem="sW7-xv-Kke" secondAttribute="leading" id="dqX-Y4-iqP"/>
+                            <constraint firstItem="FyO-wV-5ip" firstAttribute="top" secondItem="sW7-xv-Kke" secondAttribute="top" id="pI7-Hb-IGg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo Map" id="bIl-8X-40k"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZg-G6-bQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195" y="725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="97o-Ic-KC8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3cd-zp-cV9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aDo-uB-31n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vVC-R6-BKp" kind="relationship" relationship="rootViewController" id="J87-6h-iKc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qc-51-jam" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-617" y="725"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="64" height="64"/>
+    </resources>
 </document>
