@@ -141,11 +141,44 @@
                     <connections>
                         <outlet property="mapView" destination="FyO-wV-5ip" id="8dx-RT-BtB"/>
                         <segue destination="eZf-Nb-6PU" kind="show" identifier="tagSegue" id="4VG-Or-PC8"/>
+                        <segue destination="WMV-Kb-3nj" kind="show" identifier="fullImageSegue" id="1wR-Hd-V7u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZg-G6-bQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="195" y="725"/>
+        </scene>
+        <!--Full Image View Controller-->
+        <scene sceneID="OYf-Oc-ArJ">
+            <objects>
+                <viewController id="WMV-Kb-3nj" customClass="FullImageViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gg0-7r-efd"/>
+                        <viewControllerLayoutGuide type="bottom" id="n14-gS-nFD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JlN-m3-Z2x">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iTb-da-VkH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iTb-da-VkH" firstAttribute="top" secondItem="JlN-m3-Z2x" secondAttribute="top" id="5dW-XK-TBD"/>
+                            <constraint firstItem="iTb-da-VkH" firstAttribute="leading" secondItem="JlN-m3-Z2x" secondAttribute="leading" id="Ug8-du-yD5"/>
+                            <constraint firstAttribute="trailing" secondItem="iTb-da-VkH" secondAttribute="trailing" id="WSx-9R-O0G"/>
+                            <constraint firstItem="n14-gS-nFD" firstAttribute="top" secondItem="iTb-da-VkH" secondAttribute="bottom" id="uu6-9Q-6xO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fullImageView" destination="iTb-da-VkH" id="lNH-gd-Lla"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkM-B9-ggB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195" y="1468"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="97o-Ic-KC8">
