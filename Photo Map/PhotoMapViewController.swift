@@ -35,8 +35,20 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             annotationView.rightCalloutAccessoryView = detailsButton
         }
         
-        let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
-        imageView.image = (annotation as? PhotoAnnotation)?.photo
+        var resizeRenderImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+        resizeRenderImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        resizeRenderImageView.layer.borderWidth = 3.0
+        resizeRenderImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeRenderImageView.image = (annotation as? PhotoAnnotation)?.photo
+
+        UIGraphicsBeginImageContext(resizeRenderImageView.frame.size)
+        resizeRenderImageView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        var thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        let accessoryImageView = annotationView.leftCalloutAccessoryView as! UIImageView
+        accessoryImageView.image = thumbnail
+        annotationView.image = thumbnail
         
         return annotationView
     }
